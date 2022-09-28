@@ -1,7 +1,5 @@
 <?php
 session_start();
-/*session is started if you don't write this line can't use $_Session  global variable*/
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +25,6 @@ if(isset($_SESSION['user'])){
     $_SESSION["objusuario"]=$user->getNombre();
     include 'vistas/home.php';
 
-
 }else if(isset($_POST['username']) && isset($_POST['password'])){
     
     $userForm = $_POST['username'];
@@ -35,7 +32,6 @@ if(isset($_SESSION['user'])){
 
     $user = new User();
     if($user->userExists($userForm, $passForm)){
-        //echo "Existe el usuario";
         $userSession->setCurrentUser($userForm);
         $user->setUser($userForm);
         $_SESSION["userid"]=$user->getId();
@@ -43,18 +39,12 @@ if(isset($_SESSION['user'])){
         $_SESSION["objusuario"]=$user->getNombre();
         include 'vistas/home.php';
     }else{
-        //echo "No existe el usuario";
         $errorLogin = "Nombre de usuario y/o password incorrecto";
         include_once 'vistas/login.php';
     }
 }else{
-    //echo "login";
     include_once 'vistas/login.php';
 }
-
-
-
 ?>
-
 </body>
 </html>
